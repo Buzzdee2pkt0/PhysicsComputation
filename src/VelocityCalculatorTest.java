@@ -2,6 +2,8 @@ import org.junit.Test;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.junit.Assert.*;
 
@@ -21,8 +23,15 @@ public class VelocityCalculatorTest {
     public  void velocityCalculator(){
         //Calculate the velocity
         VelocityCalculator calculator = new VelocityCalculator();
-        double divisionOfFrequencyValues = calculator.calculate(80,80.1);
-        assertEquals(374740.57249999046,divisionOfFrequencyValues,0);
+        BigDecimal divisionOfFrequencyValues = calculator.calculate(new BigDecimal(40.000003950),new BigDecimal(40.000004000));
+        BigDecimal roundedResult = divisionOfFrequencyValues.setScale(10, RoundingMode.DOWN);
+        assertEquals(new BigDecimal(0.3897301954),roundedResult);
     }
 
+
+    @Test
+    public void frequencyMapCreation(){
+        //
+        System.out.println(main.createFrequencyMap(500));
+    }
 }
