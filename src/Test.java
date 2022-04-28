@@ -1,5 +1,3 @@
-import org.junit.Test;
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -7,19 +5,19 @@ import java.math.RoundingMode;
 
 import static org.junit.Assert.*;
 
-public class VelocityCalculatorTest {
+public class Test {
 
-    @Test
+    @org.junit.Test
     public  void imageRead() throws IOException {
         ImageReader reader = new ImageReader();
         BufferedImage image = reader.readImage(null);
         assertEquals(343, image.getHeight());
     }
-    @Test
+    @org.junit.Test
     public  void frequenciesCalculator(){
         //Calculate frequencies to each pixel line
     }
-    @Test
+    @org.junit.Test
     public  void velocityCalculator(){
         //Calculate the velocity
         VelocityCalculator calculator = new VelocityCalculator();
@@ -29,9 +27,9 @@ public class VelocityCalculatorTest {
     }
 
 
-    @Test
+    @org.junit.Test
     public void frequencyMapCreation(){
         //
-        System.out.println(main.createFrequencyMap(500));
+        System.out.println(Mapping.createFrequencyMap(500));
     }
 }

@@ -8,18 +8,11 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import static javax.imageio.ImageIO.read;
 
-
-//Business Scenario:
-// GIVEN: A SAR Image
-// WHEN:  I read the Image
-// THEN:  I can calculate real distance between pixels
-
-
-public class main {
-    public static final double FREQUENCY_GROWTH_VALUE = 0.00000005;
-    private static final String DUMMY_PATH = "C:\\Users\\klang\\IdeaProjects\\PhyCom\\files\\Testship.png";
+public class Mapping {
+    public static final double FREQUENCY_GROWTH_VALUE = 1.00000000075;
+    private static final String DUMMY_PATH = "C:\\Users\\klang\\IdeaProjects\\PhyCom\\files\\Rot.jpg";
+    public static final BigDecimal INITIALFREQUENCY_IN_GHZ = new BigDecimal(94);
 
 
     public static void main(String[] args) throws IOException {
@@ -52,25 +45,20 @@ public class main {
         VelocityCalculator calculator = new VelocityCalculator();
         System.out.println("Geschwindigkeitsberechnung zwischen meinen zwei erkannten Pixeln in Meter pro Sekunde");
         System.out.println(calculator.calculate(firstfrequency, secondfrequency));
-        // Todo noch die richtigen Frequenzvariablen einsetzten und über VelocotyCalculagor ausgeben lassen
-        //   System.out.println("FrequencyCoefficient:" + frequencyMap.get(BigDecimal.valueOf(firstYpixel)) / frequencyMap.get(Integer.valueOf(secondYpixel)));
     }
 
     /**
      * Due to missing testdata a dummy map is created for our calculations.
-     * Math.random is used to reflect the realistic uneven surface.
      *
      * @param imageHeight The pixel height of the image
      * @return Returns a map, where every pixel has a frequency.
      */
     public static Map<Integer, BigDecimal> createFrequencyMap(double imageHeight) {
         Map<Integer, BigDecimal> frequencyMap = new HashMap<Integer, BigDecimal>();
-        BigDecimal initialfrequencyInGhz =  new BigDecimal(40);
+        BigDecimal frequencyInGhz = INITIALFREQUENCY_IN_GHZ;
         for (int i = 1; i <= imageHeight; i++){
-
-            frequencyMap.put(i, initialfrequencyInGhz);
-            double randomGrowth = FREQUENCY_GROWTH_VALUE + Math.random() * FREQUENCY_GROWTH_VALUE * 0.01;
-            initialfrequencyInGhz =  initialfrequencyInGhz.add(BigDecimal.valueOf(FREQUENCY_GROWTH_VALUE));
+            frequencyMap.put(i, frequencyInGhz);
+            frequencyInGhz =  frequencyInGhz.multiply(BigDecimal.valueOf(FREQUENCY_GROWTH_VALUE));
         }
         return frequencyMap;
     }
